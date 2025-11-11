@@ -1,0 +1,60 @@
+﻿@page
+@model Lab4.Pages.StudentManagement.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Student.Name)
+            @Html.DisplayNameFor(model => model.Student.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Student.Name)
+            @Html.DisplayFor(model => model.Student.Id)
+    </dl>
+</div>
+<hr />
+
+<h4>Academic Records</h4>
+<p>
+    <!-- keep id in route so sorting links remain for this student -->
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Details" asp-route-id="@Model.Student.Id" asp-route-sortOrder="@Model.CourseSortParm">
+                    Course
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Details" asp-route-id="@Model.Student.Id" asp-route-sortOrder="@Model.GradeSortParm">
+                    Grade
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Records) {
+        <tr>
+            <td>
+                @(item.CourseCodeNavigation?.Title ?? item.CourseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,56 @@
+﻿@page
+@model Lab4.Pages.AcademicRecordManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.GradeSortParm">
+                    @Html.DisplayNameFor(model => model.AcademicRecord[0].Grade)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.CourseSortParm">
+                    Course
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.StudentSortParm">
+                    Student
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.AcademicRecord) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCodeNavigation.DisplayText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Student.DisplayText)
+            </td>
+            <td>
+                    <a asp-page="./Edit" asp-route-courseCode="@item.CourseCode" asp-route-studentId="@item.StudentId">Edit</a>
+                    <a asp-page="./Index" asp-route-action="delete" asp-route-courseCode="@item.CourseCode" asp-route-studentId="@item.StudentId"
+                   onclick="return confirm('Are you sure you want to delete the academic record?\n @item.Student.Name\n @item.CourseCodeNavigation.Title\nThis action cannot be undone.');">
+                    Delete
+                </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
