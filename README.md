@@ -1,1 +1,1 @@
-A Simpole CRUD application for manageing student records written in C# using .Net and MS Entiy Frameworks
+A Simple CRUD application for managing student records written in C# using .Net and MS Entity Frameworks
